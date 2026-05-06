@@ -3,9 +3,78 @@
 <html>
 <head>
   <title>App Apiculture</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 10px;
+      width: 200px;
+    }
+
+    .circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin: 20px auto;
+      border: 1px solid black;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>🐝 Mon Rucher</h1>
-  <p>Application en cours..j.</p>
+
+<h1>🐝 Mon Rucher</h1>
+
+<!-- Nom de la ruche -->
+<input type="text" id="nomRuche" placeholder="Nom de la ruche">
+
+<br>
+
+<!-- Liste des reines -->
+<select id="reine" onchange="updateCouleur()">
+  <option value="">Choisir une reine</option>
+  <option value="2024">Reine 2024</option>
+  <option value="2023">Reine 2023</option>
+  <option value="2025">Reine 2025</option>
+</select>
+
+<!-- Rond couleur -->
+<div id="couleur" class="circle"></div>
+
+<script>
+
+function getCouleur(year) {
+  let mod = year % 5;
+
+  switch(mod) {
+    case 1: return "white";
+    case 2: return "yellow";
+    case 3: return "red";
+    case 4: return "green";
+    case 0: return "blue";
+    default: return "gray";
+  }
+}
+
+function updateCouleur() {
+  let year = document.getElementById("reine").value;
+  let circle = document.getElementById("couleur");
+
+  if (year === "") {
+    circle.style.backgroundColor = "transparent";
+    return;
+  }
+
+  circle.style.backgroundColor = getCouleur(parseInt(year));
+}
+
+</script>
+
 </body>
 </html>
